@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pointers", "Pointers\Pointers.vcxproj", "{1589B92C-5FB3-4177-B865-73CF8152BAC6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransferParameteres", "TransferParameteres\TransferParameteres.vcxproj", "{DEEE4167-5DCE-4730-BD4B-28B82A41089E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "References", "References\References.vcxproj", "{1486AF54-A01E-447B-8479-E5B661E735D3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DynamicMemory", "DynamicMemory\DynamicMemory.vcxproj", "{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,22 @@ Global
 		{DEEE4167-5DCE-4730-BD4B-28B82A41089E}.Release|x64.Build.0 = Release|x64
 		{DEEE4167-5DCE-4730-BD4B-28B82A41089E}.Release|x86.ActiveCfg = Release|Win32
 		{DEEE4167-5DCE-4730-BD4B-28B82A41089E}.Release|x86.Build.0 = Release|Win32
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Debug|x64.ActiveCfg = Debug|x64
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Debug|x64.Build.0 = Debug|x64
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Debug|x86.ActiveCfg = Debug|Win32
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Debug|x86.Build.0 = Debug|Win32
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Release|x64.ActiveCfg = Release|x64
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Release|x64.Build.0 = Release|x64
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Release|x86.ActiveCfg = Release|Win32
+		{1486AF54-A01E-447B-8479-E5B661E735D3}.Release|x86.Build.0 = Release|Win32
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Debug|x64.ActiveCfg = Debug|x64
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Debug|x64.Build.0 = Debug|x64
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Debug|x86.ActiveCfg = Debug|Win32
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Debug|x86.Build.0 = Debug|Win32
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Release|x64.ActiveCfg = Release|x64
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Release|x64.Build.0 = Release|x64
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Release|x86.ActiveCfg = Release|Win32
+		{5E7B4194-8521-4ABF-91AF-DF1BFB82207F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
