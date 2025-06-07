@@ -16,8 +16,8 @@ void main()
 	int arr[n];
 	int cntChetnoe = 0;
 	int cntNeChetnoe = 0;
-	int* even = new int[n];
-	int* odd = new int[n];
+	int* even = new int[cntChetnoe];
+	int* odd = new int[cntNeChetnoe];
 
 	FillRand(arr, n);
 	Chetnoe_nechetnoe(arr, n, cntChetnoe, cntNeChetnoe);
@@ -34,7 +34,7 @@ void FillRand(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		arr[i] = rand() % 100 + 1;
+		arr[i] = rand() % 100;
 	}
 }
 void Chetnoe_nechetnoe(int arr[], const int n, int cntChetnoe, int cntNeChetnoe)
@@ -64,7 +64,6 @@ void Even(int arr[], int even[], const int n)
 			cout << even[i] << " ";
 		}
 	}
-	
 }
 void Odd(int arr[], int odd[], const int n)
 {
