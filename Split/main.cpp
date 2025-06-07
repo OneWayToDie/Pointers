@@ -15,16 +15,20 @@ void main()
 	const int n = 10;
 	int arr[n];
 	FillRand(arr, n);
+	cout << "Массив arr - ";
 	Print(arr, n);
+	cout << "количество чётных чисел в массиве - ";
 	int cntChetnoe = Chetnoe(arr, n);
 	int* even = new int[cntChetnoe];
+	cout << "Массив even - ";
 	Even(arr, even, n);
+	cout << "количество нечётных чисел в массиве - ";
 	int cntNeChetnoe = Nechetnoe(arr, n);
 	int* odd = new int[cntNeChetnoe];
+	cout << "Массив odd - ";
 	Odd(arr, odd, n);
 	ochistka(odd, even);
 }
-
 void FillRand(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
@@ -42,7 +46,7 @@ int Chetnoe(int arr[], const int n)
 			cntChetnoe++;
 		}
 	}
-	cout << "количество чётных чисел в массиве - " << cntChetnoe << endl;
+	cout << cntChetnoe << endl;
 	return cntChetnoe;
 }
 int Nechetnoe(int arr[], const int n)
@@ -55,12 +59,12 @@ int Nechetnoe(int arr[], const int n)
 			cntNeChetnoe++;
 		}
 	}
-	cout << "количество нечётных чисел в массиве - " << cntNeChetnoe << endl;
+	cout << cntNeChetnoe << endl;
 	return cntNeChetnoe;
 }
 int Even(int arr[], int even[], const int n)
 {
-	cout << "Массив even - ";
+	
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] % 2 == 0)
@@ -74,7 +78,6 @@ int Even(int arr[], int even[], const int n)
 }
 int Odd(int arr[], int odd[], const int n)
 {
-	cout << "Массив odd - ";
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] % 2 != 0)
@@ -84,11 +87,9 @@ int Odd(int arr[], int odd[], const int n)
 		}
 	}
 	return n;
-	
 }
 void Print(int arr[], const int n)
 {
-	cout << "Массив arr - ";
 	for (int i = 0; i < n; i++)
 	{
 		cout << arr[i] << " ";
