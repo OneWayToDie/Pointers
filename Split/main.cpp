@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 
 void FillRand(int arr[], const int n);
@@ -23,7 +23,7 @@ void main()
 	Chetnoe_nechetnoe(arr, n, cntChetnoe, cntNeChetnoe);
 	Even(arr, even, n);
 	Odd(arr, odd, n);
-	cout << "Ìàññèâ arr - ";
+	cout << "ÐœÐ°ÑÑÐ¸Ð² arr - ";
 	Print(arr, n);
 
 	delete[] even;
@@ -50,12 +50,12 @@ void Chetnoe_nechetnoe(int arr[], const int n, int cntChetnoe, int cntNeChetnoe)
 			cntNeChetnoe++;
 		}
 	}
-	cout << "êîëè÷åñòâî ÷¸òíûõ ÷èñåë â ìàññèâå - " << cntChetnoe << endl;
-	cout << "êîëè÷åñòâî íå÷¸òíûõ ÷èñåë â ìàññèâå - " << cntNeChetnoe << endl;
+	cout << "ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‡Ñ‘Ñ‚Ð½Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ» Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ - " << cntChetnoe << endl;
+	cout << "ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð½ÐµÑ‡Ñ‘Ñ‚Ð½Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ» Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ - " << cntNeChetnoe << endl;
 }
 void Even(int arr[], int even[], const int n)
 {
-	cout << "Ìàññèâ even - ";
+	cout << "ÐœÐ°ÑÑÐ¸Ð² even - ";
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] % 2 == 0)
@@ -69,7 +69,7 @@ void Even(int arr[], int even[], const int n)
 void Odd(int arr[], int odd[], const int n)
 {
 	cout << endl;
-	cout << "Ìàññèâ odd - ";
+	cout << "ÐœÐ°ÑÑÐ¸Ð² odd - ";
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] % 2 != 0)
