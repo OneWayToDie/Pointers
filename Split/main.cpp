@@ -2,31 +2,28 @@
 using namespace std;
 
 void FillRand(int arr[], const int n);
-void Chetnoe_nechetnoe(int arr[], const int n, int cntChetnoe, int cntNeChetnoe);
+int Chetnoe(int arr[], const int n);
+int Nechetnoe(int arr[], const int n);
 void Even(int arr[], int even[], const int n);
 void Odd(int arr[], int odd[], const int n);
 void Print(int arr[], const int n);
 
-
 void main()
 {
 	setlocale(LC_ALL, "");
-
 	const int n = 10;
 	int arr[n];
-	int cntChetnoe = 0;
-	int cntNeChetnoe = 0;
-	int* even = new int[cntChetnoe];
-	int* odd = new int[cntNeChetnoe];
-
 	FillRand(arr, n);
-	cout << "Массив arr - ";
 	Print(arr, n);
-	Chetnoe_nechetnoe(arr, n, cntChetnoe, cntNeChetnoe);
+	int cntChetnoe = Chetnoe(arr, n);
+	int* even = new int[cntChetnoe];
 	Even(arr, even, n);
+	int cntNeChetnoe = Nechetnoe(arr, n);
+	int* odd = new int[cntNeChetnoe];
 	Odd(arr, odd, n);
-	
 
+	delete[] even;
+	delete[] odd;
 }
 
 void FillRand(int arr[], const int n)
@@ -36,21 +33,31 @@ void FillRand(int arr[], const int n)
 		arr[i] = rand() % 100;
 	}
 }
-void Chetnoe_nechetnoe(int arr[], const int n, int cntChetnoe, int cntNeChetnoe)
+int Chetnoe(int arr[], const int n)
 {
+	int cntChetnoe = 0;
 	for (int i = 0; i < n; i++)
 	{
 		if (arr[i] % 2 == 0)
 		{
 			cntChetnoe++;
 		}
+	}
+	cout << "количество чётных чисел в массиве - " << cntChetnoe << endl;
+	return cntChetnoe;
+}
+int Nechetnoe(int arr[], const int n)
+{
+	int cntNeChetnoe = 0;
+	for (int i = 0; i < n; i++)
+	{
 		if (arr[i] % 2 != 0)
 		{
 			cntNeChetnoe++;
 		}
 	}
-	cout << "количество чётных чисел в массиве - " << cntChetnoe << endl;
 	cout << "количество нечётных чисел в массиве - " << cntNeChetnoe << endl;
+	return cntNeChetnoe;
 }
 void Even(int arr[], int even[], const int n)
 {
@@ -63,11 +70,10 @@ void Even(int arr[], int even[], const int n)
 			cout << even[i] << " ";
 		}
 	}
-	delete[] even;
+	cout << endl;
 }
 void Odd(int arr[], int odd[], const int n)
 {
-	cout << endl;
 	cout << "Массив odd - ";
 	for (int i = 0; i < n; i++)
 	{
@@ -78,10 +84,10 @@ void Odd(int arr[], int odd[], const int n)
 		}
 	}
 	cout << endl;
-	delete[] odd;
 }
 void Print(int arr[], const int n)
 {
+	cout << "Массив arr - ";
 	for (int i = 0; i < n; i++)
 	{
 		cout << arr[i] << " ";
