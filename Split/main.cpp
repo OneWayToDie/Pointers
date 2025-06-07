@@ -22,7 +22,7 @@ void main()
 	int* odd = new int[cntNeChetnoe];
 	Odd(arr, odd, n);
 
-	delete[] odd,even;
+	delete[] odd;
 }
 
 void FillRand(int arr[], const int n)
