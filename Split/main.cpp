@@ -20,14 +20,13 @@ void main()
 	int* odd = new int[cntNeChetnoe];
 
 	FillRand(arr, n);
+	cout << "Массив arr - ";
+	Print(arr, n);
 	Chetnoe_nechetnoe(arr, n, cntChetnoe, cntNeChetnoe);
 	Even(arr, even, n);
 	Odd(arr, odd, n);
-	cout << "Массив arr - ";
-	Print(arr, n);
+	
 
-	delete[] even;
-	delete[] odd;
 }
 
 void FillRand(int arr[], const int n)
@@ -64,6 +63,7 @@ void Even(int arr[], int even[], const int n)
 			cout << even[i] << " ";
 		}
 	}
+	delete[] even;
 }
 void Odd(int arr[], int odd[], const int n)
 {
@@ -78,7 +78,7 @@ void Odd(int arr[], int odd[], const int n)
 		}
 	}
 	cout << endl;
-	
+	delete[] odd;
 }
 void Print(int arr[], const int n)
 {
