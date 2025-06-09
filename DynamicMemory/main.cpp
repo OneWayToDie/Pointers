@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 void FillRand(int arr[], const int n);
@@ -9,12 +9,30 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
-	cout << "Введите размер массива: "; cin >> n;
-	int* arr = new int[n]; //объявление динамического массива
+	cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: "; cin >> n;
+	int* arr = new int[n]; //РѕР±СЉСЏРІР»РµРЅРёРµ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РјР°СЃСЃРёРІР°
 
 	FillRand(arr, n);
 	Print(arr, n);
 
+	int value;
+	cout << "Р’РІРµРґРёС‚Рµ РґРѕР±Р°РІР»СЏРµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ: "; cin >> value;
+
+	//1) РЎРѕР·РґР°С‘Рј Р±СѓС„РµСЂРЅС‹Р№ РјР°СЃСЃРёРІ РЅСѓР¶РЅРѕРіРѕ СЂР°Р·РјРµСЂР°:
+
+	int* buffer = new int[n + 1];
+
+	//2) РљРѕРїРёСЂСѓРµРј РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РјР°СЃСЃРёРІР° РІ Р±СѓС„С„РµСЂРЅС‹Р№:
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i];
+	}
+
+	//3)
+
+	arr[n] = value;
+	n++;
+	Print(arr, n);
 	delete[] arr;
 }
 
@@ -22,16 +40,16 @@ void FillRand(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		*(arr + i) = rand() % 100; // через арифметику eказателей и оператор разыменования
+		*(arr + i) = rand() % 100; // С‡РµСЂРµР· Р°СЂРёС„РјРµС‚РёРєСѓ СѓРєР°Р·Р°С‚РµР»РµР№ Рё РѕРїРµСЂР°С‚РѕСЂ СЂР°Р·С‹РјРµРЅРѕРІР°РЅРёСЏ
 	}
 }
 void Print(int arr[], const int n)
 {
-	//cout << arr << endl;
-	//cout << *arr << endl;
+	cout << arr << endl;
+	cout << *arr << endl;
 	for (int i = 0; i < n; i++)
 	{
-		cout << arr[i] << "\t"; // через оператор индексирования
+		cout << arr[i] << "\t"; // С‡РµСЂРµР· РѕРїРµСЂР°С‚РѕСЂ РёРЅРґРµРєСЃРёСЂРѕРІР°РЅРёСЏ
 	}
 	cout << endl;
 }
