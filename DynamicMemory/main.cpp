@@ -10,8 +10,8 @@ int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
 
 int* Insert(int arr[], int& n, const int value);
+int* Erase(int arr[], int& n, const int value);
 
-void Print_Insert(int arr[], int n);
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -37,6 +37,8 @@ void main()
 	cout << "Введите добавляемое значение: "; cin >> value;
 
 	arr = Insert(arr, n, value);
+	Print(arr, n);
+	arr = Erase(arr, n, value);
 	Print(arr, n);
 	delete[] arr;
 }
@@ -117,7 +119,6 @@ int* Insert(int arr[], int& n, const int value)
 		buffer[i] = arr[i];
 	}
 	delete[] arr;
-	/*arr = buffer;*/
 	int position;
 	cout << "Введите индекс числа: "; cin >> position;
 
@@ -130,11 +131,23 @@ int* Insert(int arr[], int& n, const int value)
 	n++;
 	return buffer;
 }
-void Print_Insert(int arr[], int n)
+int* Erase(int arr[], int& n, const int value)
 {
-	for (int i = 0; i < n + 1; i++)
+	int* buffer = new int[--n];
+	int position;
+	cout << "Введите индекс числа: "; cin >> position;
+
+	for (int i = 0; i < n+1 ; i++)
 	{
-		cout << arr[i] << "\t";
+		if (i < position)
+		{
+			buffer[i] = arr[i];
+		}
+		else
+		{
+			buffer[i] = arr[i + 1];
+		}
 	}
-	cout << endl;
+	delete[] arr;
+	return buffer;
 }
