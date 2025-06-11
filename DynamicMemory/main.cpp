@@ -9,8 +9,8 @@ int* Push_front(int arr[], int& n, const int value);
 int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
 
-int* Insert(int arr[], int& n, const int value);
-int* Erase(int arr[], int& n, const int value);
+int* Insert(int arr[], int& n, const int value, int position);
+int* Erase(int arr[], int& n, const int value, int position);
 
 void main()
 {
@@ -35,10 +35,12 @@ void main()
 	Print(arr, n);*/
 
 	cout << "Введите добавляемое значение: "; cin >> value;
-
-	arr = Insert(arr, n, value);
+	int position;
+	cout << "Введите индекс числа: "; cin >> position;
+	arr = Insert(arr, n, value, position);
 	Print(arr, n);
-	arr = Erase(arr, n, value);
+	cout << "Введите индекс числа: "; cin >> position;
+	arr = Erase(arr, n, value, position);
 	Print(arr, n);
 	delete[] arr;
 }
@@ -111,7 +113,7 @@ int* pop_front(int arr[], int& n)
 	delete[] arr;
 	return buffer;
 }
-int* Insert(int arr[], int& n, const int value)
+int* Insert(int arr[], int& n, const int value, int position)
 {
 	int* buffer = new int[n + 1];
 	for (int i = 0; i < n; i++)
@@ -119,8 +121,6 @@ int* Insert(int arr[], int& n, const int value)
 		buffer[i] = arr[i];
 	}
 	delete[] arr;
-	int position;
-	cout << "Введите индекс числа: "; cin >> position;
 
 	for (int i = n; i > position; i--)
 	{
@@ -131,11 +131,10 @@ int* Insert(int arr[], int& n, const int value)
 	n++;
 	return buffer;
 }
-int* Erase(int arr[], int& n, const int value)
+int* Erase(int arr[], int& n, const int value, int position)
 {
 	int* buffer = new int[--n];
-	int position;
-	cout << "Введите индекс числа: "; cin >> position;
+
 
 	for (int i = 0; i < n+1 ; i++)
 	{
