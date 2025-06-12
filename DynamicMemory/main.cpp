@@ -22,7 +22,7 @@ int** pop_row_front(int** arr, int& rows, const int cols);
 void push_col_back(int** arr, const int rows, int& cols);
 void push_col_front(int** arr, const int rows, int& cols);
 int** pop_col_back(int** arr, const int rows, int& cols);
-int** pop_col_front(int** arr, const int rows, int& cols);
+void pop_col_front(int** arr, const int rows, int& cols);
 
 //#define DYNAMIC_MEMORY_1 // ctrl+shift+u - смена регистра
 #define DYNAMIC_MEMORY_2
@@ -330,17 +330,19 @@ int** pop_col_back(int** arr, const int rows, int& cols)
 		return arr;
 	}
 }
-//int** pop_col_front(int** arr, const int rows, int& cols)
-//{
-//	for (int i = 0; i < rows; i++)
-//	{
-//		int* buffer = new int[--cols];
-//		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j+1];
-//		delete[] arr[i];
-//		arr[i] = buffer;
-//		return arr;
-//	}
-//}
+void pop_col_front(int** arr, const int rows, int& cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1];
+
+		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j+1];
+
+		delete[] arr[i];
+		arr[i] = buffer;
+	}
+	cols--;
+}
 void Clear(int** arr, const int rows)
 {
 	for (int i = 0; i < rows; i++)
