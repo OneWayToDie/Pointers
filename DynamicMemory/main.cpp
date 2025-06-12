@@ -32,6 +32,9 @@ void push_col_back(int** arr, const int rows, int& cols);
 void push_col_front(int** arr, const int rows, int& cols);
 int** pop_col_back(int** arr, const int rows, int& cols);
 void pop_col_front(int** arr, const int rows, int& cols);
+int** Insert_row(int** arr, int& rows, const int cols, int position);
+int** Erase_row(int** arr, int& rows, const int cols, int position);
+void Insert_cols(int** arr, const int rows, int& cols, int position);
 #endif
 
 void main()
@@ -113,6 +116,22 @@ void main()
 	cout << "удаляет первый столбец: " << endl;
 	pop_col_front(arr, rows, cols);
 	Print(arr, rows, cols);
+	int position;
+	cout << "Введите индекс числа: "; cin >> position;
+	cout << "Добавляем строку в назначенное место двумерного динамического массива: " << endl;
+	arr = Insert_row(arr, rows, cols, position);
+	FillRand(arr[position], cols, 100, 1000);
+	Print(arr, rows, cols);
+	cout << "Введите индекс числа: "; cin >> position;
+	cout << "Удаляем строку в назначенном месте двумерного динамического массива: " << endl;
+	arr = Erase_row(arr, rows, cols, position);
+	Print(arr, rows, cols);
+	cout << "Введите индекс числа: "; cin >> position;
+	cout << "Вставляем столбец в назначенное место двумерного динамического массива: " << endl;
+	Insert_cols(arr, rows, cols, position);
+	for (int i = 0; i < rows; i++)arr[i][position] = rand() % 1000;
+	Print(arr, rows, cols);
+
 #endif
 	// УДАЛЕНИЕ СТРОК ДВУМЕРНОГО МАССИВА
 	Clear(arr, rows);
@@ -275,7 +294,7 @@ int** push_row_front(int** arr, int& rows, const int cols)
 		buffer[i+1] = arr[i];
 	}
 
-	delete arr;
+	delete[] arr;
 
 
 	buffer[0] = new int [cols] {};
@@ -349,6 +368,67 @@ void pop_col_front(int** arr, const int rows, int& cols)
 		arr[i] = buffer;
 	}
 	cols--;
+}
+int** Insert_row(int** arr, int& rows, const int cols, int position)
+{
+	int** buffer = new int* [rows + 1];
+
+	for (int i = 0; i < rows; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+
+	for (int i = rows; i > position; i--)
+	{
+		buffer[i] = buffer[i-1];
+	}
+	buffer[position] = new int[cols] {};
+
+	rows++;
+	return buffer;
+}
+int** Erase_row(int** arr, int& rows, const int cols, int position)
+{
+	int** buffer = new int* [--rows];
+	for (int i = 0; i < rows + 1; i++)
+	{
+		i < position ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
+	}
+	delete[] arr;
+	return buffer;
+}
+void Insert_cols(int** arr, const int rows, int& cols, int position)
+{
+	/*for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1] {};
+
+		for (int j = 0; j < cols; j++)buffer[j + 1] = arr[i][j];
+
+		delete[] arr[i];
+
+		arr[i] = buffer;
+	}
+	cols++;*/
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1] {};
+
+		for (int j = 0; j < cols; j++)buffer[j+1] = arr[i][j];
+		
+		delete[] arr[position];
+
+		arr[position] = buffer;
+		
+		for (int j = cols; j > position; j--)
+		{
+			 arr[i][j] = buffer[j];
+		}
+		
+		arr[position] = new int[rows] {};
+	}
+	cols++;
 }
 void Clear(int** arr, const int rows)
 {
