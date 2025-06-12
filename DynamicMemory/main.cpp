@@ -1,7 +1,15 @@
 ﻿#include<iostream>
 using namespace std;
+//#define DYNAMIC_MEMORY_1 // ctrl+shift+u - смена регистра
+#define DYNAMIC_MEMORY_2
+#define resheno
+#define Dont_define
 
+#ifdef Dont_define
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
+#endif
+
+#ifdef DYNAMIC_MEMORY_1
 void Print(int arr[], const int n);
 int* Push_back(int arr[], int& n, const int value);
 int* Push_front(int arr[], int& n, const int value);
@@ -9,10 +17,11 @@ int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
 int* Insert(int arr[], int& n, const int value, int position);
 int* Erase(int arr[], int& n, const int value, int position);
+#endif
 
+#ifdef DYNAMIC_MEMORY_2
 void Allocate(int** arr, const int rows, const int cols);
 void Clear(int** arr, const int rows);
-
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
 void Print(int** arr, const int rows, const int cols);
 int** push_row_back(int** arr, int& rows, const int cols);
@@ -23,10 +32,7 @@ void push_col_back(int** arr, const int rows, int& cols);
 void push_col_front(int** arr, const int rows, int& cols);
 int** pop_col_back(int** arr, const int rows, int& cols);
 void pop_col_front(int** arr, const int rows, int& cols);
-
-//#define DYNAMIC_MEMORY_1 // ctrl+shift+u - смена регистра
-#define DYNAMIC_MEMORY_2
-#define resheno
+#endif
 
 void main()
 {
@@ -108,16 +114,13 @@ void main()
 	pop_col_front(arr, rows, cols);
 	Print(arr, rows, cols);
 #endif
-
 	// УДАЛЕНИЕ СТРОК ДВУМЕРНОГО МАССИВА
 	Clear(arr, rows);
-
 	// Удаление массива указателей
 	delete[] arr;
-
 #endif
 }
-#ifdef DYNAMIC_MEMORY_2
+#ifdef Dont_define
 void FillRand(int arr[], const int n, int minRand, int maxRand)
 {
 	for (int i = 0; i < n; i++)
@@ -125,6 +128,9 @@ void FillRand(int arr[], const int n, int minRand, int maxRand)
 		*(arr + i) = rand() % (maxRand - minRand) + minRand; // через арифметику указателей и оператор разыменования
 	}
 }
+#endif
+
+#ifdef DYNAMIC_MEMORY_1
 void Print(int arr[], const int n)
 {
 	/*cout << arr << endl;
@@ -219,6 +225,7 @@ int* Erase(int arr[], int& n, const int value, int position)
 	return buffer;
 }
 #endif
+
 #ifdef DYNAMIC_MEMORY_2
 void FillRand(int** arr, const int rows, const int cols, int minRand, int maxRand)
 {
