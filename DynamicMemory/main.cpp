@@ -1,28 +1,28 @@
 ﻿#include<iostream>
 using namespace std;
 
-void Allocate(int** arr, const int rows, const int cols);
-void Clear(int** arr, const int rows);
-
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
-void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
 void Print(int arr[], const int n);
-void Print(int** arr, const int rows, const int cols);
 int* Push_back(int arr[], int& n, const int value);
 int* Push_front(int arr[], int& n, const int value);
-
 int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
-
 int* Insert(int arr[], int& n, const int value, int position);
 int* Erase(int arr[], int& n, const int value, int position);
 
+void Allocate(int** arr, const int rows, const int cols);
+void Clear(int** arr, const int rows);
+
+void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
+void Print(int** arr, const int rows, const int cols);
 int** push_row_back(int** arr, int& rows, const int cols);
 int** push_row_front(int** arr, int& rows, const int cols);
-
-
+int** pop_row_back(int** arr, int& rows, const int cols);
+int** pop_row_front(int** arr, int& rows, const int cols);
 void push_col_back(int** arr, const int rows, int& cols);
-
+void push_col_front(int** arr, const int rows, int& cols);
+int** pop_col_back(int** arr, const int rows, int& cols);
+int** pop_col_front(int** arr, const int rows, int& cols);
 
 //#define DYNAMIC_MEMORY_1 // ctrl+shift+u - смена регистра
 #define DYNAMIC_MEMORY_2
@@ -87,16 +87,31 @@ void main()
 	push_col_back(arr, rows, cols);
 	for (int i = 0; i < rows; i++)arr[i][cols - 1] = rand() % 1000;
 	Print(arr, rows, cols);
+	cout << "Добавляем столбец в начало двумерного динамического массива: " << endl;
+	push_col_front(arr, rows, cols);
+	for (int i = 0; i < rows; i++)arr[i][0] = rand() % 1000;
+	Print(arr, rows, cols);
 	cout << "Добавляем строку в начало двумерного динамического массива: " << endl;
 	arr = push_row_front(arr, rows, cols);
 	FillRand(arr[0], cols, 100, 1000);
 	Print(arr, rows, cols);
-
-
+	cout << "удаляет последнюю строку: " << endl;
+	arr = pop_row_back(arr, rows, cols);
+	Print(arr, rows, cols);
+	cout << "удаляет первую строку: " << endl;
+	arr = pop_row_front(arr, rows, cols);
+	Print(arr, rows, cols);
+	cout << "удаляет последний столбец: " << endl;
+	pop_col_back(arr, rows, cols);
+	Print(arr, rows, cols);
+	cout << "удаляет первый столбец: " << endl;
+	pop_col_front(arr, rows, cols);
+	Print(arr, rows, cols);
 #endif
 
 	// УДАЛЕНИЕ СТРОК ДВУМЕРНОГО МАССИВА
 	Clear(arr, rows);
+
 	// Удаление массива указателей
 	delete[] arr;
 
@@ -204,7 +219,6 @@ int* Erase(int arr[], int& n, const int value, int position)
 	return buffer;
 }
 #endif
-
 #ifdef DYNAMIC_MEMORY_2
 void FillRand(int** arr, const int rows, const int cols, int minRand, int maxRand)
 {
@@ -228,7 +242,6 @@ void Print(int** arr, const int rows, const int cols)
 	}
 	cout << endl;
 }
-
 int** push_row_back(int** arr, int& rows, const int cols)
 {
 	int** buffer = new int* [rows + 1];
@@ -278,7 +291,56 @@ void push_col_back(int** arr, const int rows, int& cols)
 	}
 	cols++;
 }
+void push_col_front(int** arr, const int rows, int& cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols+1] {};
 
+		for (int j = 0; j < cols; j++)buffer[j+1] = arr[i][j];
+
+		delete[] arr[i];
+
+		arr[i] = buffer;
+	}
+	cols++;
+}
+int** pop_row_back(int** arr, int& rows, const int cols)
+{
+	int** buffer = new int* [--rows];
+	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
+	delete[] arr;
+	return buffer;
+}
+int** pop_row_front(int** arr, int& rows, const int cols)
+{
+	int** buffer = new int* [--rows];
+	for (int i = 0; i < rows; i++)buffer[i] = arr[i + 1];
+	delete[] arr;
+	return buffer;
+}
+int** pop_col_back(int** arr, const int rows, int& cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int [--cols];
+		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j];
+		delete[] arr[i];
+		arr[i] = buffer;
+		return arr;
+	}
+}
+//int** pop_col_front(int** arr, const int rows, int& cols)
+//{
+//	for (int i = 0; i < rows; i++)
+//	{
+//		int* buffer = new int[--cols];
+//		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j+1];
+//		delete[] arr[i];
+//		arr[i] = buffer;
+//		return arr;
+//	}
+//}
 void Clear(int** arr, const int rows)
 {
 	for (int i = 0; i < rows; i++)
