@@ -400,17 +400,6 @@ int** Erase_row(int** arr, int& rows, const int cols, int position)
 }
 void Insert_cols(int** arr, const int rows, int& cols, int position)
 {
-	/*for (int i = 0; i < rows; i++)
-	{
-		int* buffer = new int[cols + 1] {};
-
-		for (int j = 0; j < cols; j++)buffer[j + 1] = arr[i][j];
-
-		delete[] arr[i];
-
-		arr[i] = buffer;
-	}
-	cols++;*/
 	for (int i = 0; i < rows; i++)
 	{
 		int* buffer = new int[cols + 1] {};
