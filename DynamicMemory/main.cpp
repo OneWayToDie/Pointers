@@ -35,6 +35,7 @@ void pop_col_front(int** arr, const int rows, int& cols);
 int** Insert_row(int** arr, int& rows, const int cols, int position);
 int** Erase_row(int** arr, int& rows, const int cols, int position);
 void Insert_cols(int** arr, const int rows, int& cols, int position);
+void Erase_cols(int** arr, const int rows, int& cols, int position);
 #endif
 
 void main()
@@ -131,6 +132,10 @@ void main()
 	Insert_cols(arr, rows, cols, position);
 	for (int i = 0; i < rows; i++)arr[i][position] = rand() % 1000;
 	Print(arr, rows, cols);
+	/*cout << "Введите индекс числа: "; cin >> position;
+	cout << "Удаляем столбец в назначенном месте двумерного динамического массива: " << endl;
+	Erase_cols(arr, rows, cols, position);
+	Print(arr, rows, cols);*/
 
 #endif
 	// УДАЛЕНИЕ СТРОК ДВУМЕРНОГО МАССИВА
@@ -406,9 +411,9 @@ void Insert_cols(int** arr, const int rows, int& cols, int position)
 
 		for (int j = 0; j < cols; j++)buffer[j+1] = arr[i][j];
 		
-		delete[] arr[position];
+		delete[] arr[i];
 
-		arr[position] = buffer;
+		arr[i] = buffer;
 		
 		for (int j = cols; j > position; j--)
 		{
@@ -418,6 +423,10 @@ void Insert_cols(int** arr, const int rows, int& cols, int position)
 		arr[position] = new int[rows] {};
 	}
 	cols++;
+}
+void Erase_cols(int** arr, const int rows, int& cols, int position)
+{
+
 }
 void Clear(int** arr, const int rows)
 {
