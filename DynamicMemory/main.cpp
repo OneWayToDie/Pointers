@@ -35,6 +35,7 @@ void push_col_front(int** arr, const int rows, int& cols);
 int** pop_col_back(int** arr, const int rows, int& cols);
 void pop_col_front(int** arr, const int rows, int& cols);
 int** Insert_row(int** arr, int& rows, const int cols, int position);
+int** insert_row(int** arr, int& rows, const int cols, const int index);
 int** Erase_row(int** arr, int& rows, const int cols, int position);
 void Insert_cols(int** arr, const int rows, int& cols, int position);
 void Erase_cols(int** arr, const int rows, int& cols, int position);
@@ -126,9 +127,12 @@ void main()
 	Print(arr, rows, cols);
 	int position;
 	cout << "Добавляем строку в назначенное место двумерного динамического массива: " << endl;
-	cout << "Введите индекс добавляемой строки: "; cin >> position;
-	arr = Insert_row(arr, rows, cols, position);
-	FillRand(arr[position], cols, 100, 1000);
+	/*cout << "Введите индекс добавляемой строки: "; cin >> position;*/
+	/*arr = Insert_row(arr, rows, cols, position);*/
+	int index;
+	cout << "Введите индекс добавляемой строки: "; cin >> index;
+	arr = insert_row(arr, rows, cols, index);
+	FillRand(arr[index], cols, 100, 1000);
 	Print(arr, rows, cols);
 	cout << "Удаляем строку в назначенном месте двумерного динамического массива: " << endl;
 	cout << "Введите индекс удаляемой строки: "; cin >> position;
@@ -397,6 +401,25 @@ int** Insert_row(int** arr, int& rows, const int cols, int position)
 	}
 	buffer[position] = new int[cols] {};
 
+	rows++;
+	return buffer;
+}
+int** insert_row(int** arr, int& rows, const int cols, const int index)
+{
+	if (index < 0 || index > rows)
+	{
+		cout << "Error: Out of range exception" << endl;
+		return arr;
+	}
+	int** buffer = new int* [rows + 1] {};
+	/*for (int i = 0; i < index; i++)buffer[i] = arr[i];
+	for (int i = index; i < rows; i++)buffer[i + 1] = arr[i];*/
+	for (int i = 0;i < rows; i++)
+	{
+		buffer[i < index ? i : i + 1] = arr[i];
+	}
+	delete[] arr;
+	buffer[index] = new int[cols] {};
 	rows++;
 	return buffer;
 }
