@@ -21,7 +21,9 @@ int* Erase(int arr[], int& n, const int value, int position);
 
 #ifdef DYNAMIC_MEMORY_2
 void Allocate(int** arr, const int rows, const int cols);
+int** Allocate_pravilbnbIi(const int rows, const int cols);
 void Clear(int** arr, const int rows);
+void Clear_pravilbnbIi(int**& arr, const int rows, const int cols = 0);
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
 void Print(int** arr, const int rows, const int cols);
 int** push_row_back(int** arr, int& rows, const int cols);
@@ -78,10 +80,14 @@ void main()
 	cout << "Введите количество строк: "; cin >> rows;
 	cout << "Введите количество элементов строки: "; cin >> cols;
 	//1) СОЗДАЁМ МАССИВ УКАЗАТЕЛЕЙ
-	int** arr = new int* [rows];
+	int** arr = Allocate_pravilbnbIi(rows, cols);
 
 	//2) ВЫДЕЛЯЕМ ПАМЯТЬ ПОДСТРОКИ
-	Allocate(arr, rows, cols);
+
+	/*Allocate(arr, rows, cols);*/
+
+	//Copy - функция НЕ изменяет переданную в неё память, а возвращает изменненую копию полученной памяти
+	//Mutable - функция изменяет полученный блок памяти;
 
 	//3) РАБОТА-РАБОТА, ПЕРЕЙДИ НА ФЕДОТА
 	cout << "Выводим наш двумерный массив: " << endl;
@@ -93,6 +99,7 @@ void main()
 	arr = push_row_back(arr, rows, cols);
 	FillRand(arr[rows - 1], cols, 100, 1000);
 	Print(arr, rows, cols);
+	
 	cout << "Добавляем столбец в конец двумерного динамического массива: " << endl;
 	push_col_back(arr, rows, cols);
 	for (int i = 0; i < rows; i++)arr[i][cols - 1] = rand() % 1000;
@@ -118,30 +125,30 @@ void main()
 	pop_col_front(arr, rows, cols);
 	Print(arr, rows, cols);
 	int position;
-	cout << "Введите индекс числа: "; cin >> position;
 	cout << "Добавляем строку в назначенное место двумерного динамического массива: " << endl;
+	cout << "Введите индекс добавляемой строки: "; cin >> position;
 	arr = Insert_row(arr, rows, cols, position);
 	FillRand(arr[position], cols, 100, 1000);
 	Print(arr, rows, cols);
-	cout << "Введите индекс числа: "; cin >> position;
 	cout << "Удаляем строку в назначенном месте двумерного динамического массива: " << endl;
+	cout << "Введите индекс удаляемой строки: "; cin >> position;
 	arr = Erase_row(arr, rows, cols, position);
 	Print(arr, rows, cols);
-	cout << "Введите индекс числа: "; cin >> position;
 	cout << "Вставляем столбец в назначенное место двумерного динамического массива: " << endl;
+	cout << "Введите индекс добавляемого столбца: "; cin >> position;
 	Insert_cols(arr, rows, cols, position);
 	for (int i = 0; i < rows; i++)arr[i][position] = rand() % 1000;
 	Print(arr, rows, cols);
+#endif
 	/*cout << "Введите индекс числа: "; cin >> position;
 	cout << "Удаляем столбец в назначенном месте двумерного динамического массива: " << endl;
 	Erase_cols(arr, rows, cols, position);
 	Print(arr, rows, cols);*/
 
-#endif
 	// УДАЛЕНИЕ СТРОК ДВУМЕРНОГО МАССИВА
-	Clear(arr, rows);
+	Clear_pravilbnbIi(arr, rows, cols);
 	// Удаление массива указателей
-	delete[] arr;
+	
 #endif
 }
 #ifdef Dont_define
@@ -409,18 +416,13 @@ void Insert_cols(int** arr, const int rows, int& cols, int position)
 	{
 		int* buffer = new int[cols + 1] {};
 
-		for (int j = 0; j < cols; j++)buffer[j+1] = arr[i][j];
+		for (int j = 0; j < position; j++)buffer[j] = arr[i][j];
+		for (int j = position; j < cols; j++)buffer[j+1] = arr[i][j];
 		
 		delete[] arr[i];
 
 		arr[i] = buffer;
 		
-		for (int j = cols; j > position; j--)
-		{
-			 arr[i][j] = buffer[j];
-		}
-		
-		arr[position] = new int[rows] {};
 	}
 	cols++;
 }
@@ -435,11 +437,32 @@ void Clear(int** arr, const int rows)
 		delete[] arr[i];
 	}
 }
+void Clear_pravilbnbIi(int**& arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		delete[] arr[i];
+	}
+
+	delete[] arr;
+	//3) Зануляем указатель на массив
+	arr = nullptr;
+}
 void Allocate(int** arr, const int rows, const int cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
 		arr[i] = new int[cols];
 	}
+}
+int** Allocate_pravilbnbIi(const int rows, const int cols)
+{
+	int** arr = new int* [rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols];
+	}
+	return arr;
 }
 #endif
