@@ -280,6 +280,7 @@ template<typename T> T* Erase(T arr[], int& n, const T value, int position)
 }
 #endif
 
+
 #ifdef DYNAMIC_MEMORY_2
 template<typename T> void FillRand(T** arr, const int rows, const int cols, int minRand, int maxRand)
 {
