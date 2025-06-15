@@ -34,11 +34,11 @@ template<typename T> void push_col_back(T** arr, const int rows, int& cols);
 template<typename T> void push_col_front(T** arr, const int rows, int& cols);
 template<typename T> T** pop_col_back(T** arr, const int rows, int& cols);
 template<typename T> void pop_col_front(T** arr, const int rows, int& cols);
-template<typename T> T** Insert_row(T** arr, int& rows, const int cols, int position);
-template<typename T> T** insert_row(T** arr, int& rows, const int cols, const int position);
+template<typename T> T** Insert_row(T** arr, int& rows, const int cols, const int position);
 template<typename T> T** Erase_row(T** arr, int& rows, int cols, int position);
 template<typename T> void Insert_cols(T** arr, const int rows, int& cols, int position);
 template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int position);
+
 #endif
 
 #define DATATYPE double
@@ -116,7 +116,7 @@ void main()
 	int position;
 	cout << "Добавляем строку в назначенное место двумерного динамического массива: " << endl;
 	cout << "Введите индекс добавляемой строки: "; cin >> position;
-	arr = insert_row(arr, rows, cols, position);
+	arr = Insert_row(arr, rows, cols, position);
 	FillRand(arr[position], cols, 100, 1000);
 	Print(arr, rows, cols);
 	cout << "Удаляем строку в назначенном месте двумерного динамического массива: " << endl;
@@ -341,66 +341,75 @@ template<typename T> void pop_col_front(T** arr, const int rows, int& cols)
 	}
 	cols--;
 }
-template<typename T> T** Insert_row(T** arr, int& rows, const int cols, int position)
+template<typename T> T** Insert_row(T** arr, int& rows, const int cols, const int position)
 {
-		T** buffer = new T * [rows + 1];
-		for (int i = 0; i < rows; i++)buffer[i] = arr[i];
-		delete[] arr;
-		for (int i = rows; i > position; i--)buffer[i] = buffer[i - 1];
-		buffer[position] = new T[cols]{};
-		rows++;
-		return buffer;
-}
-template<typename T> T** insert_row(T** arr, int& rows, const int cols, const int position)
-{
-	if (position < 0 || position > rows)
+	if (position == 0) push_row_front(arr, rows, cols);
+	else if (position == rows) push_row_back(arr, rows, cols);
+	else if (position < 0 || position > rows)
 	{
 		cout << "Error: Out of range exception" << endl;
 		return arr;
 	}
+	else if (position > 0 && position < rows)
+	{
 		T** buffer = new T * [rows + 1] {};
 		for (int i = 0;i < rows; i++)buffer[i < position ? i : i + 1] = arr[i];
 		delete[] arr;
 		buffer[position] = new T[cols]{};
 		rows++;
 		return buffer;
+	}
 }
 template<typename T> T** Erase_row(T** arr, int& rows, int cols, int position)
 {
-	
-	T** buffer = new T* [--rows];
-	for (int i = 0; i < rows + 1; i++)
+	if (position == 0) pop_row_front(arr, rows, cols);
+	else if (position == rows) pop_row_back(arr, rows, cols);
+	else if (position > 0 && position < rows)
 	{
-		i < position ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
+		T** buffer = new T* [--rows];
+		for (int i = 0; i < rows + 1; i++)
+		{
+			i < position ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
+		}
+		delete[] arr;
+		return buffer;
 	}
-	delete[] arr;
-	return buffer;
 }
 template<typename T> void Insert_cols(T** arr, const int rows, int& cols, int position)
 {
-	for (int i = 0; i < rows; i++)
+	if (position == 0) push_col_front(arr, rows, cols);
+	else if (position == rows) push_col_back(arr, rows, cols);
+	else if (position > 0 && position < cols)
 	{
-		T* buffer = new T[cols + 1] {};
-		for (int j = 0; j < position; j++)buffer[j] = arr[i][j];
-		for (int j = position; j < cols; j++)buffer[j+1] = arr[i][j];
-		delete[] arr[i];
-		arr[i] = buffer;
+		for (int i = 0; i < rows; i++)
+		{
+			T* buffer = new T[cols + 1]{};
+			for (int j = 0; j < position; j++)buffer[j] = arr[i][j];
+			for (int j = position; j < cols; j++)buffer[j + 1] = arr[i][j];
+			delete[] arr[i];
+			arr[i] = buffer;
+		}
+		cols++;
 	}
-	cols++;
 }
 template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int position)
 {
-	for (int i = 0; i < rows; i++)
+	if (position == 0) pop_col_front(arr, rows, cols);
+	else if (position == rows) pop_col_back(arr, rows, cols);
+	else if (position > 0 && position < cols)
 	{
-		T* buffer = new T[cols-1];
-		for (int j = 0; j < cols-1; j++)
+		for (int i = 0; i < rows; i++)
 		{
-			position > j ? buffer[j] = arr[i][j] : buffer[j] = arr[i][j + 1];
+			T* buffer = new T[cols - 1];
+			for (int j = 0; j < cols - 1; j++)
+			{
+				position > j ? buffer[j] = arr[i][j] : buffer[j] = arr[i][j + 1];
+			}
+			delete[] arr[i];
+			arr[i] = buffer;
 		}
-		delete[] arr[i];
-		arr[i] = buffer;
+		cols--;
 	}
-	cols--;
 }
 template<typename T> void Clear(T** arr, const int rows)
 {
