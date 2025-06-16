@@ -364,6 +364,11 @@ template<typename T> T** Erase_row(T** arr, int& rows, int cols, int position)
 {
 	if (position == 0) pop_row_front(arr, rows, cols);
 	else if (position == rows) pop_row_back(arr, rows, cols);
+	else if (position < 0 || position > rows)
+	{
+		cout << "Error: Out of range exception" << endl;
+		return arr;
+	}
 	else if (position > 0 && position < rows)
 	{
 		T** buffer = new T* [--rows];
@@ -379,6 +384,10 @@ template<typename T> void Insert_cols(T** arr, const int rows, int& cols, int po
 {
 	if (position == 0) push_col_front(arr, rows, cols);
 	else if (position == rows) push_col_back(arr, rows, cols);
+	else if (position < 0 || position > cols)
+	{
+		cout << "Error: Out of range exception" << endl;
+	}
 	else if (position > 0 && position < cols)
 	{
 		for (int i = 0; i < rows; i++)
@@ -396,6 +405,10 @@ template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int pos
 {
 	if (position == 0) pop_col_front(arr, rows, cols);
 	else if (position == rows) pop_col_back(arr, rows, cols);
+	else if (position < 0 || position > cols)
+	{
+		cout << "Error: Out of range exception" << endl;
+	}
 	else if (position > 0 && position < cols)
 	{
 		for (int i = 0; i < rows; i++)
