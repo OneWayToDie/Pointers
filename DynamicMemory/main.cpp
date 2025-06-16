@@ -38,7 +38,6 @@ template<typename T> T** Insert_row(T** arr, int& rows, const int cols, const in
 template<typename T> T** Erase_row(T** arr, int& rows, int cols, int position);
 template<typename T> void Insert_cols(T** arr, const int rows, int& cols, int position);
 template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int position);
-
 #endif
 
 #define DATATYPE double
